@@ -6,10 +6,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "build": "ionic build && cordova prepare && cordova prepare ios",
     "postinstall": "patch-package"
   },
   "private": true,
@@ -73,7 +73,7 @@
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {},
-      "engineerapart-branch-cordova-sdk": {}
+      "branch-cordova-sdk": {}
     },
     "platforms": [
       "ios"
