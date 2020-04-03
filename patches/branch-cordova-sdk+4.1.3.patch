@@ -1,0 +1,63 @@
+diff --git a/node_modules/branch-cordova-sdk/src/index.js b/node_modules/branch-cordova-sdk/src/index.js
+index ae8ff7b..f14dd86 100644
+--- a/node_modules/branch-cordova-sdk/src/index.js
++++ b/node_modules/branch-cordova-sdk/src/index.js
+@@ -1,7 +1,7 @@
+ var exec = require("cordova/exec");
+ var deviceVendor =
+   typeof window.clientInformation != "undefined" &&
+-  typeof window.clientInformation.vendor != "undefined"
++    typeof window.clientInformation.vendor != "undefined"
+     ? window.clientInformation.vendor
+     : "unknownVendor";
+ 
+@@ -89,6 +89,10 @@ Branch.prototype.initSession = function initSession() {
+   return execute("initSession");
+ };
+ 
++Branch.prototype.initIosSession = function initIosSession() {
++  return execute("initIosSession", []);
++};
++
+ Branch.prototype.setRequestMetadata = function setRequestMetadata(key, val) {
+   if (!key || typeof key !== "string") {
+     return executeReject("Please set key");
+diff --git a/node_modules/branch-cordova-sdk/src/ios/BranchNPM.h b/node_modules/branch-cordova-sdk/src/ios/BranchNPM.h
+index 39325ca..8b13789 100644
+--- a/node_modules/branch-cordova-sdk/src/ios/BranchNPM.h
++++ b/node_modules/branch-cordova-sdk/src/ios/BranchNPM.h
+@@ -1 +1 @@
+-#define BRANCH_NPM true
++
+diff --git a/node_modules/branch-cordova-sdk/src/ios/BranchSDK.h b/node_modules/branch-cordova-sdk/src/ios/BranchSDK.h
+index 3ca1979..2c4547d 100644
+--- a/node_modules/branch-cordova-sdk/src/ios/BranchSDK.h
++++ b/node_modules/branch-cordova-sdk/src/ios/BranchSDK.h
+@@ -27,6 +27,7 @@
+ 
+ // BranchSDK Basic Methods
+ - (void)initSession:(CDVInvokedUrlCommand*)command;
++- (void)initIosSession:(CDVInvokedUrlCommand*)command;
+ - (void)disableTracking:(CDVInvokedUrlCommand*)command;
+ - (void)setDebug:(CDVInvokedUrlCommand*)command;
+ - (void)getAutoInstance:(CDVInvokedUrlCommand*)command;
+diff --git a/node_modules/branch-cordova-sdk/src/ios/BranchSDK.m b/node_modules/branch-cordova-sdk/src/ios/BranchSDK.m
+index 56e974b..88d5f50 100644
+--- a/node_modules/branch-cordova-sdk/src/ios/BranchSDK.m
++++ b/node_modules/branch-cordova-sdk/src/ios/BranchSDK.m
+@@ -77,6 +77,15 @@ NSString * const pluginVersion = @"4.1.3";
+ #pragma mark - Public APIs
+ #pragma mark - Branch Basic Methods
+ 
++- (void)initIosSession:(CDVInvokedUrlCommand*)command
++{
++  Branch *branch = [Branch getInstance];
++  id launchOptions = [command.arguments objectAtIndex:0];
++  [branch delayInitToCheckForSearchAds];
++  [branch useLongerWaitForApleSearchAds];
++  [branch initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {}];
++}
++
+ - (void)initSession:(CDVInvokedUrlCommand*)command
+ {
+   [[Branch getInstance] registerPluginName:@"CordovaIonic" version:pluginVersion];

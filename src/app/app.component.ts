@@ -28,7 +28,7 @@ export class AppComponent {
 
   initializeBranch() {
     // Branch initialization
-    (window as any).Branch.initSession().then((data: any) => {
+    (window as any).Branch.initIosSession().then((data: any) => {
       if (data['+clicked_branch_link']) {
         // read deep link data on click
         alert('Deep Link Data: ' + JSON.stringify(data));
