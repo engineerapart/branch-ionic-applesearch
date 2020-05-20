@@ -1,3 +1,16 @@
+diff --git a/node_modules/branch-cordova-sdk/plugin.xml b/node_modules/branch-cordova-sdk/plugin.xml
+index 1e6767b..6731306 100644
+--- a/node_modules/branch-cordova-sdk/plugin.xml
++++ b/node_modules/branch-cordova-sdk/plugin.xml
+@@ -86,7 +86,7 @@ SOFTWARE.
+               <source url="https://github.com/CocoaPods/Specs.git"/>
+           </config>
+           <pods>
+-              <pod name="Branch" spec="~> 0.31.3" />
++              <pod name="Branch" spec="~> 0.33.1" />
+           </pods>
+       </podspec>
+   </platform>
 diff --git a/node_modules/branch-cordova-sdk/src/index.js b/node_modules/branch-cordova-sdk/src/index.js
 index ae8ff7b..7ef5aef 100644
 --- a/node_modules/branch-cordova-sdk/src/index.js
