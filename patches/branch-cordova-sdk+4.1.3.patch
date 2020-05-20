@@ -55,16 +55,18 @@ index 3ca1979..2c4547d 100644
  - (void)setDebug:(CDVInvokedUrlCommand*)command;
  - (void)getAutoInstance:(CDVInvokedUrlCommand*)command;
 diff --git a/node_modules/branch-cordova-sdk/src/ios/BranchSDK.m b/node_modules/branch-cordova-sdk/src/ios/BranchSDK.m
-index 56e974b..66e3117 100644
+index 56e974b..9e529de 100644
 --- a/node_modules/branch-cordova-sdk/src/ios/BranchSDK.m
 +++ b/node_modules/branch-cordova-sdk/src/ios/BranchSDK.m
-@@ -77,6 +77,18 @@ - (void)continueUserActivity:(CDVInvokedUrlCommand*)command
+@@ -77,6 +77,20 @@ - (void)continueUserActivity:(CDVInvokedUrlCommand*)command
  #pragma mark - Public APIs
  #pragma mark - Branch Basic Methods
  
 +- (void)initIosSession:(CDVInvokedUrlCommand*)command
 +{
 +  Branch *branch = [Branch getInstance];
++  [[Branch getInstance] setDebug];
++
 +  id launchOptions = NULL;
 +  if (command.arguments.count > 0) {
 +    launchOptions = [command.arguments objectAtIndex:0];
